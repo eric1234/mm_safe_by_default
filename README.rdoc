@@ -1,0 +1,40 @@
+= Description
+
+A MongoMapper plugin that will make models safe by default. This is the
+reverse of the default MongoMapper behavior implemented by the "safe"
+plugin.
+
+A class can be marked as "unsafe" if you have a class where verification
+is not critical. You can also still determine on a per-save basis if
+safety should be used through the use of the :safe flag.
+
+= Usage
+
+  class User
+    include MongoMapper::Document
+    key :usernanme, String
+  end
+  User.ensure_index :username, :unique => true
+
+  u1 = User.new
+  u1.username = 'duplicate'
+  u1.save # Mongo::OperationFailure raised if 'duplicate' already exists
+
+  u1.save :safe => false # Nothing raised - fire and forget
+
+  class Log
+    include MongoMapper::Document
+    unsafe
+    .....
+  end
+  l = Log.new
+  ... do something with l to make it not save ....
+  l.save                # Nothing raised
+  l.save :safe => false # Nothing raised
+  l.save :safe => true  # Mongo::OperationFailure raised
+
+= CREDIT
+
+* Developed by Eric Anderson (http://pixelwareinc.com)
+* Enhanced via projects developed under
+  Southern Web Group (http://southernwebgroup.com)
