@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.rdoc_options << '--main' << 'README.rdoc'
   s.summary = 'Models are safe unless unsafe is called'
   s.description = <<-DESCRIPTION
-    The opposite of the built-in 'safe' plugin. All models are safe by default.
-    Only if unsafe is called can you fire and forget.
+    The opposite of the built-in 'safe' plugin. All models are safe by
+    default. Only if unsafe is called can you fire and forget.
   DESCRIPTION
 end
